@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark Brew - Уютная кофейня</title>
+    <style>
+      :root {
+        --dark-bg: #1a1a1a;
+        --darker-bg: #121212;
+        --accent: #8b5a2b;
+        --text: #e0e0e0;
+        --light-text: #ffffff;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--dark-bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      header {
+        background-color: var(--darker-bg);
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .nav-btn {
+        background-color: var(--accent);
+        color: var(--light-text);
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        background-color: #a06d3f;
+        transform: translateY(-2px);
+      }
+
+      .content-section {
+        padding: 2rem 0;
+        min-height: 60vh;
+      }
+
+      h1,
+      h2 {
+        color: var(--light-text);
+        text-align: center;
+      }
+
+      .coffee-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        display: block;
+        margin: 2rem auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      footer {
+        background-color: var(--darker-bg);
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .active-section {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .contact-info {
+        background-color: var(--darker-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: 2rem auto;
+      }
+
+      .contact-info p {
+        margin: 0.5rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <button class="nav-btn" onclick="showSection('home')">Главная</button>
+          <button class="nav-btn" onclick="showSection('about')">О нас</button>
+          <button class="nav-btn" onclick="showSection('contacts')">
+            Контакты
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Главная страница -->
+      <section id="home" class="content-section active-section">
+        <h1>Добро пожаловать в Dark Brew</h1>
+        <img
+          src="dark_interier.jpg"
+          alt="Интерьер кофейни"
+          class="coffee-image"
+        />
+        <p>
+          Dark Brew - это не просто кофейня, это место, где рождаются кофейные
+          традиции. У нас вы найдёте идеальную атмосферу для работы, отдыха или
+          приятной беседы.
+        </p>
+        <p>
+          Наши бариста - настоящие мастера своего дела, которые приготовят для
+          вас кофе именно так, как вы любите. Мы тщательно следим за
+          температурой воды, временем экстракции и другими параметрами, чтобы
+          каждый глоток приносил удовольствие.
+        </p>
+        <p>
+          В нашем меню вы найдёте как классические варианты кофе, так и
+          авторские напитки, созданные специально для ценителей. А наши десерты
+          идеально дополнят ваш кофейный опыт.
+        </p>
+        <p>
+          Приходите к нам и почувствуйте настоящий вкус кофе в уютной атмосфере
+          Dark Brew!
+        </p>
+      </section>
+
+      <!-- О нас -->
+      <section id="about" class="content-section hidden">
+        <h1>О нашей кофейне</h1>
+        <img src="fried_grains.jpg" alt="Кофейные зёрна" class="coffee-image" />
+        <p>
+          В Dark Brew мы используем только лучшие кофейные зёрна, отобранные у
+          проверенных поставщиков со всего мира. Наша философия - качество
+          превыше всего.
+        </p>
+        <p>
+          Мы сотрудничаем с небольшими фермерскими хозяйствами, которые
+          выращивают кофе с любовью и заботой. Это позволяет нам предлагать вам
+          уникальные вкусы и ароматы.
+        </p>
+        <p>
+          Все наши бариста проходят строгое обучение и регулярно повышают
+          квалификацию. Мы знаем всё о кофе и с радостью поделимся с вами нашими
+          знаниями.
+        </p>
+        <p>
+          В приготовлении напитков и блюд мы используем только свежие,
+          качественные продукты. Наши десерты готовятся ежедневно, а сиропы и
+          топпинги - собственного производства.
+        </p>
+        <p>
+          Dark Brew - это место, где каждая деталь продумана для вашего комфорта
+          и удовольствия от кофе.
+        </p>
+      </section>
+
+      <!-- Контакты -->
+      <section id="contacts" class="content-section hidden">
+        <h1>Наши контакты</h1>
+        <img src="coffee_shop.jpg" alt="Кофейня снаружи" class="coffee-image" />
+        <div class="contact-info">
+          <h2>Dark Brew Coffee</h2>
+          <p><strong>Адрес:</strong> ул. Кофейная, 42</p>
+          <p><strong>Телефон:</strong> +7 (123) 456-78-90</p>
+          <p><strong>Email:</strong> info@darkbrew.ru</p>
+          <p><strong>Часы работы:</strong></p>
+          <p>Пн-Пт: 8:00 - 22:00</p>
+          <p>Сб-Вс: 9:00 - 23:00</p>
+          <p>Мы в соцсетях: @darkbrew_coffee</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 Dark Brew Coffee. Все права защищены.</p>
+      </div>
+    </footer>
+
+    <script>
+      function showSection(sectionId) {
+        // Скрываем все секции
+        document.querySelectorAll(".content-section").forEach((section) => {
+          section.classList.add("hidden");
+          section.classList.remove("active-section");
+        });
+
+        // Показываем выбранную секцию
+        const activeSection = document.getElementById(sectionId);
+        activeSection.classList.remove("hidden");
+        activeSection.classList.add("active-section");
+      }
+    </script>
+  </body>
+</html>
