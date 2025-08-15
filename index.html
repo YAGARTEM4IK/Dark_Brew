@@ -1,229 +1,669 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dark Brew - Уютная кофейня</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Brew | Премиум кофе в темной эстетике</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
     <style>
-      :root {
-        --dark-bg: #1a1a1a;
-        --darker-bg: #121212;
-        --accent: #8b5a2b;
-        --text: #e0e0e0;
-        --light-text: #ffffff;
-      }
-
-      body {
-        font-family: "Arial", sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: var(--dark-bg);
-        color: var(--text);
-        line-height: 1.6;
-      }
-
-      header {
-        background-color: var(--darker-bg);
-        padding: 1rem 0;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      }
-
-      .container {
-        width: 90%;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      nav {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-      }
-
-      .nav-btn {
-        background-color: var(--accent);
-        color: var(--light-text);
-        border: none;
-        padding: 0.8rem 1.5rem;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-      }
-
-      .nav-btn:hover {
-        background-color: #a06d3f;
-        transform: translateY(-2px);
-      }
-
-      .content-section {
-        padding: 2rem 0;
-        min-height: 60vh;
-      }
-
-      h1,
-      h2 {
-        color: var(--light-text);
-        text-align: center;
-      }
-
-      .coffee-image {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        display: block;
-        margin: 2rem auto;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      }
-
-      footer {
-        background-color: var(--darker-bg);
-        text-align: center;
-        padding: 1.5rem 0;
-        margin-top: 2rem;
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      .active-section {
-        display: block;
-        animation: fadeIn 0.5s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
+        /* CSS Variables */
+        :root {
+            --primary: #6F4E37;   /* Кофейный */
+            --secondary: #C4A484; /* Капучино */
+            --dark: #1A120B;      /* Темный шоколад */
+            --light: #F5F5DC;     /* Бежевый */
+            --accent: #A26769;    /* Марсала */
+            --text: #D9D9D9;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        to {
-          opacity: 1;
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      }
 
-      .contact-info {
-        background-color: var(--darker-bg);
-        padding: 1.5rem;
-        border-radius: 8px;
-        max-width: 500px;
-        margin: 2rem auto;
-      }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-      .contact-info p {
-        margin: 0.5rem 0;
-      }
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 18, 11, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .burger-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(26, 18, 11, 0.7), rgba(26, 18, 11, 0.7)), 
+                        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.6s;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary);
+            color: var(--light);
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.9s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::after {
+            left: 100%;
+        }
+
+        /* Coffee Menu Section */
+        .menu-section {
+            padding: 5rem 10%;
+            background: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center/cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .menu-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 18, 11, 0.9);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+            color: var(--light);
+            font-size: 2.5rem;
+        }
+
+        .coffee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .coffee-card {
+            background: rgba(245, 245, 220, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .coffee-card.animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .coffee-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .coffee-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .coffee-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .coffee-card:hover .coffee-img img {
+            transform: scale(1.1);
+        }
+
+        .coffee-info {
+            padding: 1.5rem;
+        }
+
+        .coffee-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .tasting-notes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tasting-notes span {
+            background: rgba(164, 103, 105, 0.3);
+            color: var(--light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .coffee-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 0.7rem;
+            background: var(--primary);
+            color: var(--light);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .order-btn:hover {
+            background: var(--accent);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 5rem 10%;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 4rem 10% 2rem;
+            color: var(--text);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(245, 245, 220, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(245, 245, 220, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-section {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .burger-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 0 5%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .menu-section, .about-section {
+                padding: 3rem 5%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <header>
-      <div class="container">
-        <nav>
-          <button class="nav-btn" onclick="showSection('home')">Главная</button>
-          <button class="nav-btn" onclick="showSection('about')">О нас</button>
-          <button class="nav-btn" onclick="showSection('contacts')">
-            Контакты
-          </button>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container">
-      <!-- Главная страница -->
-      <section id="home" class="content-section active-section">
-        <h1>Добро пожаловать в Dark Brew</h1>
-        <img
-          src="dark_interier.jpg"
-          alt="Интерьер кофейни"
-          class="coffee-image"
-        />
-        <p>
-          Dark Brew - это не просто кофейня, это место, где рождаются кофейные
-          традиции. У нас вы найдёте идеальную атмосферу для работы, отдыха или
-          приятной беседы.
-        </p>
-        <p>
-          Наши бариста - настоящие мастера своего дела, которые приготовят для
-          вас кофе именно так, как вы любите. Мы тщательно следим за
-          температурой воды, временем экстракции и другими параметрами, чтобы
-          каждый глоток приносил удовольствие.
-        </p>
-        <p>
-          В нашем меню вы найдёте как классические варианты кофе, так и
-          авторские напитки, созданные специально для ценителей. А наши десерты
-          идеально дополнят ваш кофейный опыт.
-        </p>
-        <p>
-          Приходите к нам и почувствуйте настоящий вкус кофе в уютной атмосфере
-          Dark Brew!
-        </p>
-      </section>
-
-      <!-- О нас -->
-      <section id="about" class="content-section hidden">
-        <h1>О нашей кофейне</h1>
-        <img src="fried_grains.jpg" alt="Кофейные зёрна" class="coffee-image" />
-        <p>
-          В Dark Brew мы используем только лучшие кофейные зёрна, отобранные у
-          проверенных поставщиков со всего мира. Наша философия - качество
-          превыше всего.
-        </p>
-        <p>
-          Мы сотрудничаем с небольшими фермерскими хозяйствами, которые
-          выращивают кофе с любовью и заботой. Это позволяет нам предлагать вам
-          уникальные вкусы и ароматы.
-        </p>
-        <p>
-          Все наши бариста проходят строгое обучение и регулярно повышают
-          квалификацию. Мы знаем всё о кофе и с радостью поделимся с вами нашими
-          знаниями.
-        </p>
-        <p>
-          В приготовлении напитков и блюд мы используем только свежие,
-          качественные продукты. Наши десерты готовятся ежедневно, а сиропы и
-          топпинги - собственного производства.
-        </p>
-        <p>
-          Dark Brew - это место, где каждая деталь продумана для вашего комфорта
-          и удовольствия от кофе.
-        </p>
-      </section>
-
-      <!-- Контакты -->
-      <section id="contacts" class="content-section hidden">
-        <h1>Наши контакты</h1>
-        <img src="coffee_shop.jpg" alt="Кофейня снаружи" class="coffee-image" />
-        <div class="contact-info">
-          <h2>Dark Brew Coffee</h2>
-          <p><strong>Адрес:</strong> ул. Кофейная, 42</p>
-          <p><strong>Телефон:</strong> +7 (123) 456-78-90</p>
-          <p><strong>Email:</strong> info@darkbrew.ru</p>
-          <p><strong>Часы работы:</strong></p>
-          <p>Пн-Пт: 8:00 - 22:00</p>
-          <p>Сб-Вс: 9:00 - 23:00</p>
-          <p>Мы в соцсетях: @darkbrew_coffee</p>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">DARK BREW</a>
+        <div class="nav-links">
+            <a href="#home">Главная</a>
+            <a href="#menu">Меню</a>
+            <a href="#about">О нас</a>
+            <a href="#contact">Контакты</a>
         </div>
-      </section>
-    </main>
+        <div class="burger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
 
-    <footer>
-      <div class="container">
-        <p>&copy; 2023 Dark Brew Coffee. Все права защищены.</p>
-      </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Искусство в каждой чашке</h1>
+            <p>Откройте для себя уникальные сорта кофе из лучших регионов мира, обжаренные с особым вниманием к деталям.</p>
+            <a href="#menu" class="btn">Исследовать меню</a>
+        </div>
+    </section>
+
+    <!-- Coffee Menu Section -->
+    <section id="menu" class="menu-section">
+        <h2 class="section-title">Наше меню</h2>
+        <div class="coffee-grid">
+            <div class="coffee-card">
+                <div class="coffee-img">
+                    <img src="https://images.unsplash.com/photo-1515442261605-65987783cb6a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Эфиопия Иргачеф">
+                </div>
+                <div class="coffee-info">
+                    <h3>Эфиопия Иргачеф</h3>
+                    <div class="tasting-notes">
+                        <span>Ягоды</span>
+                        <span>Цитрус</span>
+                        <span>Шоколад</span>
+                    </div>
+                    <div class="coffee-meta">
+                        <span>Высота: 2100м</span>
+                        <span>Обжарка: светлая</span>
+                    </div>
+                    <button class="order-btn">450₽ / 100г</button>
+                </div>
+            </div>
+
+            <div class="coffee-card">
+                <div class="coffee-img">
+                    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Колумбия Супремо">
+                </div>
+                <div class="coffee-info">
+                    <h3>Колумбия Супремо</h3>
+                    <div class="tasting-notes">
+                        <span>Карамель</span>
+                        <span>Орехи</span>
+                        <span>Коричневый сахар</span>
+                    </div>
+                    <div class="coffee-meta">
+                        <span>Высота: 1800м</span>
+                        <span>Обжарка: средняя</span>
+                    </div>
+                    <button class="order-btn">520₽ / 100г</button>
+                </div>
+            </div>
+
+            <div class="coffee-card">
+                <div class="coffee-img">
+                    <img src="https://images.unsplash.com/photo-1459755486867-b55449bb39ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Кения AA">
+                </div>
+                <div class="coffee-info">
+                    <h3>Кения AA</h3>
+                    <div class="tasting-notes">
+                        <span>Черная смородина</span>
+                        <span>Томат</span>
+                        <span>Лайм</span>
+                    </div>
+                    <div class="coffee-meta">
+                        <span>Высота: 2000м</span>
+                        <span>Обжарка: средняя</span>
+                    </div>
+                    <button class="order-btn">580₽ / 100г</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="О нашей кофейне">
+        </div>
+        <div class="about-content">
+            <h2>Наша философия</h2>
+            <p>Dark Brew - это не просто кофейня, это место, где рождается искусство. Мы тщательно отбираем лучшие зерна из Эфиопии, Колумбии, Кении и других регионов, известных своим исключительным кофе.</p>
+            <p>Наш мастер обжарки с 15-летним опытом создает уникальные профили для каждого сорта, раскрывая его истинный характер и аромат.</p>
+            <p>Мы верим, что идеальная чашка кофе - это гармония науки, искусства и страсти.</p>
+            <a href="#contact" class="btn">Посетите нас</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Dark Brew</h3>
+                <p>Премиальный кофе в темной эстетике. Искусство в каждой чашке.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Часы работы</h3>
+                <ul>
+                    <li>Пн-Пт: 8:00 - 22:00</li>
+                    <li>Сб-Вс: 9:00 - 23:00</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Кофейная, 15</li>
+                    <li><i class="fas fa-phone"></i> +7 (999) 123-45-67</li>
+                    <li><i class="fas fa-envelope"></i> info@darkbrew.ru</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Dark Brew. Все права защищены.</p>
+        </div>
     </footer>
 
     <script>
-      function showSection(sectionId) {
-        // Скрываем все секции
-        document.querySelectorAll(".content-section").forEach((section) => {
-          section.classList.add("hidden");
-          section.classList.remove("active-section");
+        // Mobile Navigation
+        const burgerMenu = document.querySelector('.burger-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        burgerMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            burgerMenu.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
         });
 
-        // Показываем выбранную секцию
-        const activeSection = document.getElementById(sectionId);
-        activeSection.classList.remove("hidden");
-        activeSection.classList.add("active-section");
-      }
+        // Scroll Animation
+        const coffeeCards = document.querySelectorAll('.coffee-card');
+
+        const animateOnScroll = () => {
+            coffeeCards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (cardPosition < screenPosition) {
+                    setTimeout(() => {
+                        card.classList.add('animate');
+                    }, index * 200);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initialize
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        burgerMenu.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
     </script>
-  </body>
+</body>
 </html>
